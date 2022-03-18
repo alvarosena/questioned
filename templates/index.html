@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %} Feed {% endblock %}
+
+{% block main %}
+<main class="container">
+    <div class="side-bar">
+        <a href="">Home</a>
+    </div>
+
+    <div class="feed">
+        <textarea class="question-input" name="question" id="question" cols="50" rows="5"
+            placeholder="Do you have questions?" autofocus>
+        </textarea>
+        <button class="btn-post">
+            Post
+        </button>
+    </div>
+
+    <div class="popular-topics">
+        <header class="topics-header">
+            <h2>Popular topics</h2>
+        </header>
+    </div>
+</main>
+{% endblock %}

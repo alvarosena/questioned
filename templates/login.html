@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questioned | Sign Up</title>
+    <title>Questioned | Login</title>
 </head>
 
 <body>
@@ -31,16 +31,14 @@
         {% endif %} {% endfor %} {% endif %} {% endwith %}
     </header>
     <form class="signup-form" action="/sign-up" method="post">
-        <h1>Welcome to Questioned</h1>
-        <p>Username</p>
-        <input type="text" id="username" name="username" required>
+        <h1>Welcome back!</h1>
         <p>Email Address</p>
         <input type="email" id="email" name="email" required>
         <p>Password</p>
         <input type="password" id="password" name="password" required>
-        <p>I already have an account <a href="/login">Login</a></p>
+        <p>I don't have an account <a href="/sign-up">Sign Up</a></p>
         <button class="btn-sign-up">
-            Sign Up
+            Login
         </button>
     </form>
 </body>

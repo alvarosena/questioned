@@ -28,8 +28,7 @@ def like(post_id):
     post = models.Post.query.filter_by(id=post_id).first()
     like = models.Like(post_id=post_id, user=session['user_username'])
 
-
     app.db.session.add(like)
     app.db.session.commit()
 
-    return jsonify({ 'likes': len(post.likes) })
+    return jsonify({ 'likes': len(post['likes']) })

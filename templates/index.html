@@ -5,6 +5,18 @@
 {% block main %}
 <main class="container-home">
     <div class="side-bar">
+        <a class="side-nav-btn" href="/">
+            <i class="fa fa-home" aria-hidden="true"></i>
+        </a>
+        <a class="side-nav-btn" href="/settings">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+        </a>
+        <a class="side-nav-btn" href="">
+            <i class="fa fa-user" aria-hidden="true"></i>
+        </a>
+        <a class="side-nav-btn" href="/notifications">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+        </a>
         <a href="/logout" class="btn-write-post">
             <i class="fa fa-sign-out" aria-hidden="true"></i>
         </a>
@@ -17,6 +29,7 @@
             <button type="submit" class="btn-post">
                 Post
             </button>
+
 
         </form>
 
@@ -48,9 +61,14 @@
                         <i onclick="sendLike({{post.id}})" class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                         {{ post.likes|length }}
                     </span>
-                    <i class="fa fa-retweet" aria-hidden="true"></i>
-                    <i class="fa fa-comment-o" aria-hidden="true"></i>
-                    2 views
+                    <span>
+                        <i class="fa fa-retweet" aria-hidden="true"></i>
+                        reposts
+                    </span>
+                    <span>
+                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                        2 views
+                    </span>
                 </div>
             </footer>
         </div>
@@ -63,14 +81,5 @@
         </header>
     </div>
 </main>
-<script>
-    document.getElementById('post-date').innerHTML = Intl.DateTimeFormat('en-US', {
-        dateStyle: 'long',
-        timeStyle: 'short'
-    }).format()
-
-    async function sendLike(postId) {
-        const url = await fetch(`http://127.0.0.1:5000/like/${postId}`)
-    }
-</script>
+<script src="../static/index.js"></script>
 {% endblock %}

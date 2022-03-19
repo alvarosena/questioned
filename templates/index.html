@@ -1,20 +1,60 @@
 {% extends 'layout.html' %}
 
-{% block title %} Feed {% endblock %}
+{% block title %} Feed | Questioned{% endblock %}
 
 {% block main %}
-<main class="container">
+<main class="container-home">
     <div class="side-bar">
-        <a href="">Home</a>
+        <a href="/logout" class="btn-write-post">
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+        </a>
     </div>
 
     <div class="feed">
-        <textarea class="question-input" name="question" id="question" cols="50" rows="5"
-            placeholder="Do you have questions?" autofocus>
-        </textarea>
-        <button class="btn-post">
-            Post
-        </button>
+        <form action="/" method="post" class="box-content">
+            <textarea class="question-input" name="text" id="text" cols="50" rows="5"
+                placeholder="Do you have questions?" autofocus></textarea>
+            <button type="submit" class="btn-post">
+                Post
+            </button>
+
+        </form>
+
+        {% if posts %}
+        <h2 class="h2-news">News</h2>
+        {% endif %}
+
+        {% for post in posts %}
+        <div class="box-content">
+            <header class="box-content-header">
+                <div>
+                    <a class="a-username" href={{ post.user_username }}>@{{ post.user_username }}</a>
+                    <span id="post-date">{{ post.created_at }}</span>
+                </div>
+                <button class="btn-more-options">
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+            </header>
+
+            <div class="box-content-data">
+                <p>
+                    {{ post.text }}
+                </p>
+            </div>
+
+            <footer class="box-content-footer">
+                <div class="box-content-reactions">
+                    <span>
+                        <i onclick="sendLike({{post.id}})" class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        {{ post.likes|length }}
+                    </span>
+                    <i class="fa fa-retweet" aria-hidden="true"></i>
+                    <i class="fa fa-comment-o" aria-hidden="true"></i>
+                    2 views
+                </div>
+            </footer>
+        </div>
+        {% endfor %}
     </div>
 
     <div class="popular-topics">
@@ -23,4 +63,14 @@
         </header>
     </div>
 </main>
+<script>
+    document.getElementById('post-date').innerHTML = Intl.DateTimeFormat('en-US', {
+        dateStyle: 'long',
+        timeStyle: 'short'
+    }).format()
+
+    async function sendLike(postId) {
+        const url = await fetch(`http://127.0.0.1:5000/like/${postId}`)
+    }
+</script>
 {% endblock %}

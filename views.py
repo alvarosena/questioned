@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, redirect, render_template, request, flash, session, url_for
 from auth import login_required
-import models
+import models as models
 import app
 
 views = Blueprint('views', __name__)

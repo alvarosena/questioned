@@ -14,7 +14,12 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <input class="search" type="text" name="search" placeholder="Search">
+            <div class="input-search">
+                <input class="search" type="text" name="search" placeholder="Search">
+                <button class="btn-search">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </div>
             <span>
                 Your account is
                 {% if session['user_username'] %}

@@ -3,8 +3,10 @@
 Social Network inspired in Twitter.
 
 <img src="./static/home.png"/> 
+<div style="display: flex; flex-direction: row" >
 <img src="./static/sign-up.png" /> 
 <img src="./static/login.png" /> 
+</div>
 
 ## Setup & Installation
 

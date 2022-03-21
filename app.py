@@ -1,14 +1,15 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from flask_session import Session
-from models import *
+from models import db
 from auth import auth
 from views import views
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///questions.db'
-db = SQLAlchemy(app)
+db.init_app(app)
+migrate = Migrate(app, db)
 
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 

@@ -44,8 +44,9 @@ def profile(username):
     posts_by_date = []
     posts = models.Post.query.filter_by(user_username=username).all()
 
-    for i in posts[:: -1]:
-        posts_by_date.append(i)
+    ## Starting in the last position of the array
+    for post in posts[:: -1]:
+        posts_by_date.append(post)
 
     return render_template('profile.html', user=user, posts=posts_by_date)
 

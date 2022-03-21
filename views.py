@@ -41,6 +41,11 @@ def profile(username):
         flash(f"The account {username} doesn't exists, 404", category='error')
         return redirect(url_for('views.index'))
 
+    posts_by_date = []
     posts = models.Post.query.filter_by(user_username=username).all()
-    return render_template('profile.html', user=user, posts=posts)
+
+    for i in posts[:: -1]:
+        posts_by_date.append(i)
+
+    return render_template('profile.html', user=user, posts=posts_by_date)
 

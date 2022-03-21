@@ -36,7 +36,11 @@ def like(post_id):
 @views.route('/<string:username>')
 def profile(username):
     user = models.User.query.filter_by(username=username).first()
-    posts = models.Post.query.filter_by(user_username=username).all()
 
+    if user == None:
+        flash(f"The account {username} doesn't exists, 404", category='error')
+        return redirect(url_for('views.index'))
+
+    posts = models.Post.query.filter_by(user_username=username).all()
     return render_template('profile.html', user=user, posts=posts)
 

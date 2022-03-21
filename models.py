@@ -7,6 +7,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     username = db.Column(db.String(80), unique=True, nullable=False)
+    biography = db.Column(db.String(200), nullable=True)
+    url = db.Column(db.String(200), nullable=True) 
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), default=func.now())
@@ -33,5 +35,3 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
     user_username = db.Column(db.String, db.ForeignKey('user.username'))
 
-
-# db.create_all()

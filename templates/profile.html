@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+
+{% block title %} {{ user.name }} | Questioned{% endblock %}
+
+{% block main %}
+<div class="profile-container">
+    <div class="personal-data">
+        <div class="profile-img">
+
+        </div>
+
+        <div class="personal-data-box">
+            <p class="personal-data-p">
+                <strong>
+                    {% if not user.name %}
+                    {% endif %}
+                    {{ user.name }}
+                </strong>
+                <span>
+                    @{{ user.username }}
+                </span>
+                <span>
+                    {% if user.name == None %}
+                    <p></p>
+                    {{ user.biography }}
+                    {% endif %}
+                </span>
+                <a href="">
+                    {% if user.name == None %}
+                    <p></p>
+                    {{ user.url }}
+                    {% endif %}
+                </a>
+            </p>
+
+            <div class="personal-follows">
+                <p class="personal-data-follows">
+                    <a href="">265 Followers</a>
+                    <a href="">154 Following</a>
+                </p>
+                <button class="btn-follow">Follow</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="personal-posts">
+        {% for post in posts %}
+        <div class="box-content">
+            <header class="box-content-header">
+                <div>
+                    <a href="">{{ user.name }}</a>
+                    <a class="a-username" href="">@{{ user.username }}</a>
+                    <span id="post-date">{{ post.created_at }}</span>
+                </div>
+                <button class="btn-more-options">
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                </button>
+            </header>
+
+            <div class="box-content-data">
+                <p>
+                    {{ post.text }}
+                </p>
+            </div>
+
+            <footer class="box-content-footer">
+                <div class="box-content-reactions">
+                    <span>
+                        <i onclick="sendLike()" class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                    </span>
+                    <span>
+                        <i class="fa fa-retweet" aria-hidden="true"></i>
+                        reposts
+                    </span>
+                    <span>
+                        <i class="fa fa-comment-o" aria-hidden="true"></i>
+                        2 views
+                    </span>
+                </div>
+            </footer>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

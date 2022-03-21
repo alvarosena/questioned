@@ -32,3 +32,11 @@ def like(post_id):
     app.db.session.commit()
 
     return jsonify({ 'likes': len(post['likes']) })
+
+@views.route('/<string:username>')
+def profile(username):
+    user = models.User.query.filter_by(username=username).first()
+    posts = models.Post.query.filter_by(user_username=username).all()
+
+    return render_template('profile.html', user=user, posts=posts)
+

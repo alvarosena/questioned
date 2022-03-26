@@ -15,7 +15,7 @@ def index():
             flash('Write some text.', category='error')
 
         else:
-            post = models.Post(text=text, user_username=session['user_username'])
+            post = models.Post(text=text, user_id=session['user_id'])
             app.db.session.add(post)
             app.db.session.commit()
             return redirect(url_for('views.index'))
@@ -26,7 +26,7 @@ def index():
 @views.route('/like/<int:post_id>')
 def like(post_id):
     post = models.Post.query.filter_by(id=post_id).first()
-    like = models.Like(post_id=post_id, user=session['user_username'])
+    like = models.Like(post_id=post_id, user_id=session['user_id'])
 
     app.db.session.add(like)
     app.db.session.commit()
@@ -42,7 +42,7 @@ def profile(username):
         return redirect(url_for('views.index'))
 
     posts_by_date = []
-    posts = models.Post.query.filter_by(user_username=username).all()
+    posts = models.Post.query.filter_by(user_id=user.id).all()
 
     ## Starting in the last position of the array
     for post in posts[:: -1]:

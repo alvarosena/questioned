@@ -31,7 +31,7 @@ def sign_up():
             password, method='sha256'))
             app.db.session.add(new_user)
             app.db.session.commit()
-            session['user_username'] = new_user.username
+            session['user_id'] = new_user.id
             return redirect(url_for('views.index'))
 
     return render_template('sign-up.html')
@@ -49,7 +49,7 @@ def login():
             if not password_match:
                 flash('Password is incorrect.')
             else:  
-                session['user_username'] = user.username
+                session['user_id'] = user.id
                 return redirect(url_for('views.index'))
 
     return render_template('login.html')
@@ -62,7 +62,7 @@ def logout():
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if session.get("user_username") is None:
+        if session.get("user_id") is None:
             return redirect("/login")
         return f(*args, **kwargs)
     return decorated_function

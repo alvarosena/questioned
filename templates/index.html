@@ -6,7 +6,7 @@
 <main class="container-home">
 
     <div class="feed">
-        <form action="/" method="post" class="box-content">
+        <form action="/" method="post" class="post-card">
             <textarea class="question-input" name="text" id="text" cols="50" rows="5"
                 placeholder="Do you have questions?" autofocus></textarea>
             <button type="submit" class="btn-post">
@@ -21,11 +21,14 @@
         {% endif %}
 
         {% for post in posts %}
-        <div class="box-content">
+        <div id={{ post.id }} class="post-card">
             <header class="box-content-header">
                 <div>
-                    <a class="a-username" href={{ post.user_username }}>@{{ post.user_id }}</a>
-                    <span id="post-date">{{ post.created_at }}</span>
+                    <span class="user-name">{{ post.user.name }}</span>
+                    <a id={{ post.user_id }} class="a-username" href={{ post.user_username }}>
+                        @{{ post.user.username }}
+                    </a>
+                    <span id="post-date" class="post-date">{{ post.created_at }}</span>
                 </div>
                 <button class="btn-more-options">
                     <i class="fa fa-ellipsis-v" aria-hidden="true"></i>

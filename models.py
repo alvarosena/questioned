@@ -12,7 +12,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), default=func.now())
-    posts = db.relationship('Post')
+    posts = db.relationship('Post', backref='user')
     likes = db.relationship('Like')
     comments = db.relationship('Comment')
 

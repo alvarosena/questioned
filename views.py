@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, redirect, render_template, request, flash,
 from auth import login_required
 import models as models
 import app
+from helpers import load_posts_by_date
 
 views = Blueprint('views', __name__)
 
@@ -21,7 +22,8 @@ def index():
             return redirect(url_for('views.index'))
 
     posts = models.Post.query.all()
-    return render_template('index.html', posts=posts)
+    posts_by_date = load_posts_by_date(posts)
+    return render_template('index.html', posts=posts_by_date)
 
 @views.route('/like/<int:post_id>')
 def like(post_id):
@@ -41,12 +43,9 @@ def profile(username):
         flash(f"The account {username} doesn't exists, 404", category='error')
         return redirect(url_for('views.index'))
 
-    posts_by_date = []
     posts = models.Post.query.filter_by(user_id=user.id).all()
 
-    ## Starting in the last position of the array
-    for post in posts[:: -1]:
-        posts_by_date.append(post)
+    posts_by_date = load_posts_by_date(posts)
 
     return render_template('profile.html', user=user, posts=posts_by_date)
 
